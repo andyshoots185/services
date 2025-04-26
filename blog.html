@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | ServiceHub Pro</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      /* Blog Section Styles */
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --dark-color: #1a1a2e;
+        --light-color: #f8f9fa;
+        --text-color: #333;
+        --text-light: #666;
+        --border-radius: 8px;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Blog Hero */
+      .blog-hero {
+        background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+        color: white;
+        padding: 120px 0 80px;
+        text-align: center;
+      }
+
+      .blog-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 30px;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .search-button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--primary-color);
+      }
+
+      /* Blog Content */
+      .blog-content {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
+        padding: 60px 0;
+      }
+
+      /* Blog Posts */
+      .blog-posts {
+        display: grid;
+        gap: 40px;
+      }
+
+      .blog-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .blog-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .blog-image {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .blog-card:hover .blog-image img {
+        transform: scale(1.05);
+      }
+
+      .blog-category {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+      }
+
+      .blog-content-text {
+        padding: 25px;
+      }
+
+      .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      .blog-meta i {
+        margin-right: 5px;
+      }
+
+      .blog-title {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .blog-excerpt {
+        margin-bottom: 20px;
+        color: var(--text-light);
+      }
+
+      .read-more {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* Sidebar */
+      .blog-sidebar {
+        background: #f9fafc;
+        padding: 25px;
+        border-radius: var(--border-radius);
+      }
+
+      .sidebar-widget {
+        margin-bottom: 40px;
+      }
+
+      .widget-title {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      .categories-list {
+        list-style: none;
+      }
+
+      .category-item {
+        margin-bottom: 10px;
+      }
+
+      .category-link {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+        display: block;
+        padding: 8px 0;
+      }
+
+      .category-link:hover {
+        color: var(--primary-color);
+        transform: translateX(5px);
+      }
+
+      .popular-posts {
+        display: grid;
+        gap: 20px;
+      }
+
+      .popular-post {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .popular-image {
+        width: 80px;
+        height: 80px;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+      }
+
+      .popular-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Pagination */
+      .blog-pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 40px 0;
+      }
+
+      .page-link {
+        padding: 10px 15px;
+        border-radius: var(--border-radius);
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .page-link:hover,
+      .page-link.active {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .blog-content {
+          grid-template-columns: 1fr;
+        }
+
+        .blog-sidebar {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .blog-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .blog-image {
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .blog-hero {
+          padding: 80px 0 40px;
+        }
+
+        .blog-hero h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header>
+      <nav class="navbar">
+        <div class="container">
+          <a href="index.html" class="logo">ServiceHub Pro</a>
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <style>
+      /* Navigation Styles */
+      .navbar {
+        background: var(--light-color);
+        box-shadow: var(--box-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: var(--light-color);
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 100%;
+          box-shadow: var(--box-shadow);
+        }
+
+        .nav-links.show {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("show");
+        });
+      });
+    </script>
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+      <div class="container">
+        <h1>Insights & Expertise</h1>
+        <div class="search-bar">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search articles..." />
+          <button class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Content -->
+    <main class="container">
+      <div class="blog-content">
+        <!-- Blog Posts -->
+        <div class="blog-posts">
+          <!-- Blog Post 1 -->
+          <article class="blog-card">
+            <div class="blog-image">
+              <img
+                src="https://www.shutterstock.com/image-photo/digital-marketing-strategy-audience-targeting-260nw-2600577897.jpg"
+                alt="Digital Marketing Trends" />
+              <span class="blog-category">Marketing</span>
+            </div>
+            <div class="blog-content-text">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> March 15, 2024</span>
+                <span><i class="far fa-clock"></i> 5 min read</span>
+              </div>
+              <h2 class="blog-title">Top Digital Marketing Trends for 2024</h2>
+              <p class="blog-excerpt">
+                Discover the latest strategies shaping the future of digital
+                marketing and how to implement them in your business.
+              </p>
+              <a href="#" class="read-more"
+                >Read More <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <!-- Add more blog posts following the same structure -->
+        </div>
+
+        <!-- Blog Sidebar -->
+        <aside class="blog-sidebar">
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Categories</h3>
+            <ul class="categories-list">
+              <li class="category-item">
+                <a href="#" class="category-link" data-category="all">All</a>
+              </li>
+              <li class="category-item">
+                <a href="#" class="category-link" data-category="marketing"
+                  >Marketing</a
+                >
+              </li>
+              <li class="category-item">
+                <a href="#" class="category-link" data-category="web"
+                  >Web Development</a
+                >
+              </li>
+              <!-- Add more categories -->
+            </ul>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Popular Posts</h3>
+            <div class="popular-posts">
+              <div class="popular-post">
+                <div class="popular-image">
+                  <img
+                    src="https://weblizar.com/blog/wp-content/uploads/2020/07/Why-Your-Small-Business.jpg"
+                    alt="Popular Post" />
+                </div>
+                <div class="popular-content">
+                  <h4>10 Essential SEO Practices</h4>
+                  <div class="blog-meta">
+                    <span>April 2, 2024</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Add more popular posts -->
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Pagination -->
+      <div class="blog-pagination">
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link"
+          >Next <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Category Filtering
+        const categoryLinks = document.querySelectorAll(".category-link");
+        const blogCards = document.querySelectorAll(".blog-card");
+
+        categoryLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const category = this.dataset.category;
+
+            // Remove active class from all links
+            categoryLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+
+            // Filter blog posts
+            blogCards.forEach((card) => {
+              if (
+                category === "all" ||
+                card
+                  .querySelector(".blog-category")
+                  .textContent.toLowerCase() === category
+              ) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Search Functionality
+        const searchInput = document.querySelector(".search-input");
+        searchInput.addEventListener("input", function () {
+          const searchTerm = this.value.toLowerCase();
+
+          blogCards.forEach((card) => {
+            const title = card
+              .querySelector(".blog-title")
+              .textContent.toLowerCase();
+            const excerpt = card
+              .querySelector(".blog-excerpt")
+              .textContent.toLowerCase();
+            if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+
+        // Animation on scroll
+        const blogCardsAnimate = document.querySelectorAll(".blog-card");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        blogCardsAnimate.forEach((card) => {
+          card.style.opacity = 0;
+          card.style.transform = "translateY(20px)";
+          card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(card);
+        });
+      });
+    </script>
+  </body>
+</html>

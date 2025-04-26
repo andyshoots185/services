@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | ServiceHub Pro</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      /* Portfolio Section Styles */
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --dark-color: #1a1a2e;
+        --light-color: #f8f9fa;
+        --text-color: #333;
+        --text-light: #666;
+        --border-radius: 8px;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      /* Portfolio Hero */
+      .portfolio-hero {
+        background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+        color: white;
+        text-align: center;
+        padding: 120px 0 80px;
+      }
+
+      .portfolio-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+
+      /* Portfolio Filter */
+      .portfolio-filter {
+        padding: 40px 0;
+        background-color: #f9fafc;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .filter-btn {
+        padding: 12px 24px;
+        border: 2px solid var(--primary-color);
+        border-radius: 30px;
+        background: transparent;
+        color: var(--primary-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      /* Portfolio Grid */
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 60px 0;
+      }
+
+      .portfolio-item {
+        position: relative;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .portfolio-item:hover {
+        transform: translateY(-10px);
+      }
+
+      .portfolio-image {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .portfolio-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .portfolio-item:hover .portfolio-image img {
+        transform: scale(1.1);
+      }
+
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(67, 97, 238, 0.9);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: var(--transition);
+        padding: 20px;
+        text-align: center;
+        color: white;
+      }
+
+      .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+      }
+
+      .portfolio-category {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+      }
+
+      /* Project Modal */
+      .project-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: white;
+        max-width: 900px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-radius: var(--border-radius);
+        position: relative;
+        padding: 30px;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .portfolio-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .filter-buttons {
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header>
+      <nav class="navbar">
+        <div class="container">
+          <a href="index.html" class="logo">ServiceHub Pro</a>
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <style>
+      /* Navigation Styles */
+      .navbar {
+        background: var(--light-color);
+        box-shadow: var(--box-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: var(--light-color);
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 100%;
+          box-shadow: var(--box-shadow);
+        }
+
+        .nav-links.show {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("show");
+        });
+      });
+    </script>
+
+    <!-- Portfolio Hero -->
+    <section class="portfolio-hero">
+      <div class="container">
+        <h1>Our Work Portfolio</h1>
+        <p>Explore our successful projects and client collaborations</p>
+      </div>
+    </section>
+
+    <!-- Portfolio Filter -->
+    <section class="portfolio-filter">
+      <div class="container">
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web Development</button>
+          <button class="filter-btn" data-filter="marketing">Marketing</button>
+          <button class="filter-btn" data-filter="design">Design</button>
+          <button class="filter-btn" data-filter="content">Content</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="container">
+      <div class="portfolio-grid">
+        <!-- Web Development Project -->
+        <div class="portfolio-item" data-category="web">
+          <div class="portfolio-image">
+            <img
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bba8a9121328331.60c3620e1738f.png"
+              alt="Web Development Project" />
+            <span class="portfolio-category">Web Development</span>
+          </div>
+          <div class="portfolio-overlay">
+            <h3>E-commerce Platform</h3>
+            <p>Custom built e-commerce solution with React and Node.js</p>
+            <button class="view-details" data-project="1">View Details</button>
+          </div>
+        </div>
+
+        <!-- Marketing Project -->
+        <div class="portfolio-item" data-category="marketing">
+          <div class="portfolio-image">
+            <img
+              src="https://tse1.mm.bing.net/th/id/OIP.RQ9qMNSJEOnEfExLsYGgfgHaHa?rs=1&pid=ImgDetMain"
+              alt="Marketing Campaign" />
+            <span class="portfolio-category">Marketing</span>
+          </div>
+          <div class="portfolio-overlay">
+            <h3>Social Media Campaign</h3>
+            <p>Increased engagement by 300% for tech startup</p>
+            <button class="view-details" data-project="2">View Details</button>
+          </div>
+        </div>
+
+        <!-- Add more portfolio items following the same structure -->
+      </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="project-modal" id="projectModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Portfolio Filtering
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filterValue = this.dataset.filter;
+
+            // Filter portfolio items
+            portfolioItems.forEach((item) => {
+              if (
+                filterValue === "all" ||
+                item.dataset.category === filterValue
+              ) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Project Modal
+        const modal = document.getElementById("projectModal");
+        const closeBtn = document.querySelector(".close-modal");
+        const viewButtons = document.querySelectorAll(".view-details");
+
+        // Sample project data
+        const projects = {
+          1: {
+            title: "E-commerce Platform",
+            category: "Web Development",
+            client: "FashionHub",
+            description:
+              "Custom built e-commerce solution with React and Node.js",
+            details:
+              "Developed a full-stack e-commerce platform with payment integration...",
+            results: "+45% conversion rate",
+            image: "web-project.jpg",
+          },
+          2: {
+            title: "Social Media Campaign",
+            category: "Marketing",
+            client: "TechStart Inc.",
+            description: "Increased engagement by 300%",
+            details:
+              "Managed comprehensive social media strategy across platforms...",
+            results: "320% engagement increase",
+            image: "marketing-project.jpg",
+          },
+        };
+
+        viewButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const projectId = this.dataset.project;
+            const project = projects[projectId];
+
+            const modalContent = `
+                        <div class="modal-header">
+                            <h2>${project.title}</h2>
+                            <p class="project-category">${project.category}</p>
+                        </div>
+                        <div class="modal-body">
+                            <div class="project-image">
+                                <img src="${project.image}" alt="${project.title}">
+                            </div>
+                            <div class="project-details">
+                                <h3>Project Details</h3>
+                                <p>${project.details}</p>
+                                <div class="project-results">
+                                    <h4>Results Achieved</h4>
+                                    <p>${project.results}</p>
+                                </div>
+                                <div class="project-client">
+                                    <h4>Client:</h4>
+                                    <p>${project.client}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+            document.getElementById("modalContent").innerHTML = modalContent;
+            modal.style.display = "flex";
+          });
+        });
+
+        // Close modal
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+
+        // Animation on scroll
+        const portfolioItemsAnimate =
+          document.querySelectorAll(".portfolio-item");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        portfolioItemsAnimate.forEach((item) => {
+          item.style.opacity = 0;
+          item.style.transform = "translateY(20px)";
+          item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(item);
+        });
+      });
+    </script>
+  </body>
+</html>

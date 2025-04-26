@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | ServiceHub Pro</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      /* Pricing Section Styles */
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --dark-color: #1a1a2e;
+        --light-color: #f8f9fa;
+        --text-color: #333;
+        --text-light: #666;
+        --success-color: #4bb543;
+        --border-radius: 8px;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 15px;
+      }
+
+      /* Pricing Hero */
+      .pricing-hero {
+        background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+        color: white;
+        text-align: center;
+        padding: 120px 0 80px;
+      }
+
+      .pricing-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+
+      .pricing-hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      /* Pricing Toggle */
+      .pricing-toggle {
+        text-align: center;
+        margin: 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: var(--transition);
+        border-radius: 34px;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: var(--transition);
+        border-radius: 50%;
+      }
+
+      input:checked + .toggle-slider {
+        background-color: var(--primary-color);
+      }
+
+      input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+      }
+
+      /* Pricing Cards */
+      .pricing-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .pricing-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 40px;
+        box-shadow: var(--box-shadow);
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .pricing-card.popular {
+        border: 2px solid var(--primary-color);
+        transform: scale(1.05);
+      }
+
+      .popular-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 0 0 0 15px;
+        font-size: 0.9rem;
+      }
+
+      .price-amount {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 20px 0;
+      }
+
+      .price-amount span {
+        font-size: 1rem;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+
+      .price-features {
+        list-style: none;
+        margin: 25px 0;
+      }
+
+      .price-features li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .price-features i {
+        color: var(--success-color);
+        margin-right: 10px;
+      }
+
+      /* Feature Comparison */
+      .feature-comparison {
+        margin: 60px 0;
+        overflow-x: auto;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      .comparison-table th {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .comparison-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .feature-name {
+        font-weight: 600;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        background: #f9fafc;
+        padding: 60px 0;
+      }
+
+      .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .faq-item {
+        background: white;
+        padding: 25px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+      }
+
+      .faq-question {
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      /* Custom Plan Section */
+      .custom-plan {
+        text-align: center;
+        padding: 60px 0;
+        background: var(--dark-color);
+        color: white;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .pricing-card.popular {
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .pricing-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .pricing-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .pricing-hero {
+          padding: 80px 0 40px;
+        }
+
+        .pricing-hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .pricing-toggle {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header>
+      <nav class="navbar">
+        <div class="container">
+          <a href="index.html" class="logo">ServiceHub Pro</a>
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <style>
+      /* Navigation Styles */
+      .navbar {
+        background: var(--light-color);
+        box-shadow: var(--box-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: var(--light-color);
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 100%;
+          box-shadow: var(--box-shadow);
+        }
+
+        .nav-links.show {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("show");
+        });
+      });
+    </script>
+
+    <!-- Pricing Hero -->
+    <section class="pricing-hero">
+      <div class="container">
+        <h1>Simple, Transparent Pricing</h1>
+        <p>
+          Choose the perfect plan for your business needs. Scale up or down as
+          needed.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Toggle -->
+    <section class="container">
+      <div class="pricing-toggle">
+        <span>Monthly</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="pricingToggle" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span>Yearly <small>(Save 20%)</small></span>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="pricing-cards">
+        <!-- Starter Plan -->
+        <div class="pricing-card">
+          <h3>Starter</h3>
+          <p>Perfect for small businesses and startups</p>
+          <div class="price-amount monthly-price">$299<span>/month</span></div>
+          <div class="price-amount yearly-price hidden">
+            $239<span>/month</span>
+          </div>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i>5 hours of service/month</li>
+            <li><i class="fas fa-check"></i>1 dedicated specialist</li>
+            <li><i class="fas fa-check"></i>Email support</li>
+            <li><i class="fas fa-check"></i>Basic analytics</li>
+          </ul>
+          <button class="btn-primary">Get Started</button>
+        </div>
+
+        <!-- Professional Plan (Popular) -->
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <h3>Professional</h3>
+          <p>For growing businesses with regular needs</p>
+          <div class="price-amount monthly-price">$599<span>/month</span></div>
+          <div class="price-amount yearly-price hidden">
+            $479<span>/month</span>
+          </div>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i>20 hours of service/month</li>
+            <li><i class="fas fa-check"></i>3 dedicated specialists</li>
+            <li><i class="fas fa-check"></i>Priority support</li>
+            <li><i class="fas fa-check"></i>Advanced analytics</li>
+            <li><i class="fas fa-check"></i>Monthly strategy call</li>
+          </ul>
+          <button class="btn-primary">Choose Plan</button>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="pricing-card">
+          <h3>Enterprise</h3>
+          <p>Custom solutions for large businesses</p>
+          <div class="price-amount monthly-price">$999<span>/month</span></div>
+          <div class="price-amount yearly-price hidden">
+            $799<span>/month</span>
+          </div>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i>40+ hours of service/month</li>
+            <li><i class="fas fa-check"></i>Dedicated team</li>
+            <li><i class="fas fa-check"></i>24/7 priority support</li>
+            <li><i class="fas fa-check"></i>Custom reporting</li>
+            <li><i class="fas fa-check"></i>Weekly strategy calls</li>
+            <li><i class="fas fa-check"></i>Account manager</li>
+          </ul>
+          <button class="btn-primary">Contact Sales</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="container">
+      <div class="feature-comparison">
+        <h2 class="text-center">Feature Comparison</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Starter</th>
+              <th>Professional</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name">Monthly Hours</td>
+              <td>5</td>
+              <td>20</td>
+              <td>40+</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Support</td>
+              <td>Email</td>
+              <td>Priority Email/Chat</td>
+              <td>24/7 Support</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Team Members</td>
+              <td>1</td>
+              <td>3</td>
+              <td>Dedicated Team</td>
+            </tr>
+            <!-- Add more features as needed -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="text-center">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-question">Can I change plans later?</div>
+            <p>
+              Yes, you can upgrade or downgrade your plan at any time. We'll
+              prorate the difference.
+            </p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Is there a contract?</div>
+            <p>
+              No contracts. Cancel anytime with 30 days notice. No hidden fees.
+            </p>
+          </div>
+          <!-- Add more FAQs -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Plan Section -->
+    <section class="custom-plan">
+      <div class="container">
+        <h2>Need a Custom Solution?</h2>
+        <p>
+          Contact us for enterprise pricing and custom plans tailored to your
+          business needs.
+        </p>
+        <button class="btn-primary">Request Custom Plan</button>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Pricing Toggle
+        const pricingToggle = document.getElementById("pricingToggle");
+        const monthlyPrices = document.querySelectorAll(".monthly-price");
+        const yearlyPrices = document.querySelectorAll(".yearly-price");
+
+        pricingToggle.addEventListener("change", function () {
+          if (this.checked) {
+            monthlyPrices.forEach((price) => price.classList.add("hidden"));
+            yearlyPrices.forEach((price) => price.classList.remove("hidden"));
+          } else {
+            monthlyPrices.forEach((price) => price.classList.remove("hidden"));
+            yearlyPrices.forEach((price) => price.classList.add("hidden"));
+          }
+        });
+
+        // Add hover effect to pricing cards
+        const pricingCards = document.querySelectorAll(".pricing-card");
+        pricingCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-10px)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+          });
+        });
+
+        // Animate table rows on scroll
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateX(0)";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document
+          .querySelectorAll(".comparison-table tr")
+          .forEach((row, index) => {
+            row.style.opacity = 0;
+            row.style.transform =
+              "translateX(" + (index % 2 === 0 ? "-" : "") + "20px)";
+            row.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(row);
+          });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((question) => {
+          question.addEventListener("click", function () {
+            const answer = this.nextElementSibling;
+            answer.classList.toggle("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

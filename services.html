@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services | ServiceHub Pro</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      /* Service Section Styles */
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --dark-color: #1a1a2e;
+        --light-color: #f8f9fa;
+        --text-color: #333;
+        --text-light: #666;
+        --success-color: #4bb543;
+        --border-radius: 8px;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 15px;
+      }
+
+      /* Services Hero */
+      .services-hero {
+        background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+        color: white;
+        padding: 120px 0 80px;
+        text-align: center;
+      }
+
+      .services-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+
+      .services-hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      /* Service Categories */
+      .service-categories {
+        padding: 40px 0;
+        background-color: #f9fafc;
+      }
+
+      .category-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .category-btn {
+        padding: 12px 24px;
+        border: 2px solid var(--primary-color);
+        border-radius: 30px;
+        background: transparent;
+        color: var(--primary-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .category-btn.active,
+      .category-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      /* Services Grid */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 60px 0;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 60px;
+        height: 60px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        opacity: 0.1;
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(67, 97, 238, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .service-card h3 {
+        margin-bottom: 15px;
+      }
+
+      .service-features {
+        list-style: none;
+        margin: 20px 0;
+      }
+
+      .service-features li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+
+      .service-features i {
+        color: var(--success-color);
+        margin-right: 10px;
+      }
+
+      .service-pricing {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .price-tag {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      .price-tag span {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+
+      /* Service Calculator */
+      .calculator-section {
+        background: #f9fafc;
+        padding: 60px 0;
+      }
+
+      .calculator-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+      }
+
+      .calculator-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        outline: none;
+      }
+
+      .calculator-result {
+        background: rgba(67, 97, 238, 0.05);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .estimated-price {
+        font-size: 2rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 15px 0;
+      }
+
+      /* Why Choose Us */
+      .why-choose {
+        padding: 80px 0;
+        background: var(--dark-color);
+        color: white;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .benefit-card {
+        text-align: center;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--border-radius);
+      }
+
+      .benefit-icon {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 15px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .services-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .calculator-form {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .services-hero {
+          padding: 80px 0 40px;
+        }
+
+        .services-hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .category-filter {
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header>
+      <nav class="navbar">
+        <div class="container">
+          <a href="index.html" class="logo">ServiceHub Pro</a>
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <style>
+      /* Navigation Styles */
+      .navbar {
+        background: var(--light-color);
+        box-shadow: var(--box-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: var(--light-color);
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 100%;
+          box-shadow: var(--box-shadow);
+        }
+
+        .nav-links.show {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("show");
+        });
+      });
+    </script>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+      <div class="container">
+        <h1>Professional Services for Your Business Growth</h1>
+        <p>
+          Access top-tier freelance professionals and transform your business
+          with our comprehensive digital services
+        </p>
+      </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section class="service-categories">
+      <div class="container">
+        <div class="category-filter">
+          <button class="category-btn active" data-category="all">
+            All Services
+          </button>
+          <button class="category-btn" data-category="marketing">
+            Marketing
+          </button>
+          <button class="category-btn" data-category="development">
+            Development
+          </button>
+          <button class="category-btn" data-category="design">Design</button>
+          <button class="category-btn" data-category="content">Content</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="container">
+      <div class="services-grid">
+        <!-- Digital Marketing Service -->
+        <div class="service-card" data-category="marketing">
+          <div class="service-icon">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <h3>Digital Marketing</h3>
+          <p>
+            Comprehensive marketing strategies to boost your online presence and
+            conversions.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i>SEO Optimization</li>
+            <li><i class="fas fa-check"></i>Social Media Management</li>
+            <li><i class="fas fa-check"></i>PPC Advertising</li>
+            <li><i class="fas fa-check"></i>Email Marketing</li>
+          </ul>
+          <div class="service-pricing">
+            <div class="price-tag">$1,500<span>/month</span></div>
+            <button class="btn-primary">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Web Development Service -->
+        <div class="service-card" data-category="development">
+          <div class="service-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Web Development</h3>
+          <p>
+            Custom website development with modern technologies and responsive
+            design.
+          </p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i>WordPress Development</li>
+            <li><i class="fas fa-check"></i>E-commerce Solutions</li>
+            <li><i class="fas fa-check"></i>API Integration</li>
+            <li><i class="fas fa-check"></i>Website Maintenance</li>
+          </ul>
+          <div class="service-pricing">
+            <div class="price-tag">$3,000<span>/project</span></div>
+            <button class="btn-primary">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Additional service cards would follow the same structure -->
+      </div>
+    </section>
+
+    <!-- Pricing Calculator -->
+    <section class="calculator-section">
+      <div class="container">
+        <div class="calculator-container">
+          <h2>Project Cost Calculator</h2>
+          <form class="calculator-form" id="calculatorForm">
+            <div class="form-group">
+              <label for="serviceType">Service Type</label>
+              <select class="form-control" id="serviceType">
+                <option value="marketing">Digital Marketing</option>
+                <option value="development">Web Development</option>
+                <option value="design">Graphic Design</option>
+                <option value="content">Content Creation</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="projectSize">Project Size</label>
+              <select class="form-control" id="projectSize">
+                <option value="small">Small Project</option>
+                <option value="medium">Medium Project</option>
+                <option value="large">Large Project</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="duration">Project Duration</label>
+              <input
+                type="number"
+                class="form-control"
+                id="duration"
+                placeholder="Weeks"
+                min="1" />
+            </div>
+
+            <div class="form-group">
+              <label for="addons">Additional Services</label>
+              <select class="form-control" id="addons" multiple>
+                <option value="seo">SEO Optimization</option>
+                <option value="analytics">Advanced Analytics</option>
+                <option value="support">24/7 Support</option>
+              </select>
+            </div>
+          </form>
+
+          <div class="calculator-result">
+            <h3>Estimated Cost</h3>
+            <div class="estimated-price" id="estimatedPrice">$0</div>
+            <button class="btn-primary">Schedule Consultation</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose">
+      <div class="container">
+        <h2 class="text-center">Why Choose ServiceHub Pro?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Quality Guaranteed</h3>
+            <p>All services come with our 100% satisfaction guarantee</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p>Average project delivery 30% faster than industry standard</p>
+          </div>
+
+          <!-- Additional benefit cards would follow -->
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Service Filtering
+        const filterButtons = document.querySelectorAll(".category-btn");
+        const serviceCards = document.querySelectorAll(".service-card");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filterValue = this.dataset.category;
+
+            // Filter service cards
+            serviceCards.forEach((card) => {
+              if (
+                filterValue === "all" ||
+                card.dataset.category === filterValue
+              ) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Pricing Calculator
+        const calculatorForm = document.getElementById("calculatorForm");
+        const estimatedPrice = document.getElementById("estimatedPrice");
+
+        // Base prices for services
+        const basePrices = {
+          marketing: 1500,
+          development: 3000,
+          design: 1000,
+          content: 800,
+        };
+
+        // Multipliers for project size
+        const sizeMultipliers = {
+          small: 0.8,
+          medium: 1,
+          large: 1.5,
+        };
+
+        // Additional services pricing
+        const addonPrices = {
+          seo: 300,
+          analytics: 200,
+          support: 500,
+        };
+
+        function calculatePrice() {
+          const serviceType = document.getElementById("serviceType").value;
+          const projectSize = document.getElementById("projectSize").value;
+          const duration =
+            parseInt(document.getElementById("duration").value) || 1;
+          const addons = Array.from(
+            document.getElementById("addons").selectedOptions
+          ).map((option) => option.value);
+
+          // Calculate base price
+          let price = basePrices[serviceType] * sizeMultipliers[projectSize];
+
+          // Add duration multiplier
+          price *= duration;
+
+          // Add additional services
+          addons.forEach((addon) => {
+            price += addonPrices[addon];
+          });
+
+          estimatedPrice.textContent = `$${price.toLocaleString()}`;
+        }
+
+        // Update price on any input change
+        calculatorForm.addEventListener("input", calculatePrice);
+        calculatePrice(); // Initial calculation
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+
+        // Service Card Animations
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        serviceCards.forEach((card) => {
+          card.style.opacity = 0;
+          card.style.transform = "translateY(20px)";
+          card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(card);
+        });
+      });
+    </script>
+  </body>
+</html>
