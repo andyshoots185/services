@@ -466,6 +466,38 @@
           <button class="btn-primary">Choose Plan</button>
         </div>
 
+        <!-- Payment Integration -->
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const stripe = Stripe("your-publishable-key-here");
+
+            const buttons = document.querySelectorAll(".btn-primary");
+            buttons.forEach((button, index) => {
+              button.addEventListener("click", async function () {
+                const planId = [
+                  "starter-plan-id",
+                  "professional-plan-id",
+                  "enterprise-plan-id",
+                ][index];
+                try {
+                  const response = await fetch("/create-checkout-session", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ planId }),
+                  });
+                  const session = await response.json();
+                  await stripe.redirectToCheckout({ sessionId: session.id });
+                } catch (error) {
+                  console.error("Error:", error);
+                  alert("Failed to initiate payment. Please try again.");
+                }
+              });
+            });
+          });
+        </script>
         <!-- Enterprise Plan -->
         <div class="pricing-card">
           <h3>Enterprise</h3>
